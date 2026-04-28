@@ -56,7 +56,7 @@ class MomFlowOutput(BaseModel):
     Fields:
         shopping_list   — extracted items; empty list if none found.
         schedule        — time-bound tasks; empty list if none implied.
-        language        — detected primary language code ('en' | 'ar' | 'other').
+        language        — detected primary language code ('en' | 'hi' | 'other').
         confidence      — [0, 1] float. Values below 0.5 indicate the model
                           was uncertain; the pipeline should surface a refusal
                           rather than a potentially wrong list.
@@ -66,13 +66,13 @@ class MomFlowOutput(BaseModel):
         refusal         — Non-null when confidence < threshold or input is
                           out-of-scope. Contains a user-facing message.
         response_en     — Natural English reply summarising the list + schedule.
-        response_ar     — Natural Arabic reply (not a translation; rewritten
-                          for Arabic register and word order).
+        response_hi     — Natural Hindi reply (not a translation; rewritten
+                          for Hindi register and word order).
     """
 
     shopping_list: List[Item] = Field(default_factory=list)
     schedule: List[ScheduleEntry] = Field(default_factory=list)
-    language: str = Field(..., description="'en', 'ar', or 'other'.")
+    language: str = Field(..., description="'en', 'hi', or 'other'.")
     confidence: float = Field(..., ge=0.0, le=1.0)
     grounded: bool = Field(
         ...,
@@ -83,23 +83,23 @@ class MomFlowOutput(BaseModel):
         description="User-facing message when the model cannot confidently answer.",
     )
     response_en: str = Field(..., description="English-language reply.")
-    response_ar: str = Field(..., description="Arabic-language reply.")
+    response_hi: str = Field(..., description="Hindi-language reply.")
 
     # ── validators ──────────────────────────────
 
     @field_validator("language")
     @classmethod
     def language_must_be_known(cls, v: str) -> str:
-        allowed = {"en", "ar", "other"}
+        allowed = {"en", "hi", "other"}
         if v not in allowed:
             raise ValueError(f"language must be one of {allowed}, got '{v}'")
         return v
 
-    @field_validator("response_ar")
+    @field_validator("response_hi")
     @classmethod
-    def arabic_must_not_be_placeholder(cls, v: str) -> str:
+    def hindi_must_not_be_placeholder(cls, v: str) -> str:
         if v.strip() in {"", "N/A", "None", "null"}:
             raise ValueError(
-                "response_ar must be a real Arabic string, not a placeholder."
+                "response_hi must be a real Hindi string, not a placeholder."
             )
         return v

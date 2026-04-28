@@ -1,0 +1,165 @@
+[
+  {
+    "id": "en_001",
+    "description": "Simple English request with size and timing",
+    "input": "I need diapers size 4 and baby lotion next week",
+    "language_hint": "en",
+    "expected_items": ["diapers"],
+    "expected_details_contains": ["size 4"],
+    "expect_schedule": true,
+    "expect_refusal": false,
+    "min_confidence": 0.7,
+    "tags": ["easy", "english"]
+  },
+  {
+    "id": "hi_001",
+    "description": "Simple Hindi request with size",
+    "input": "मुझे डायपर साइज 3 और बेबी लोशन चाहिए",
+    "language_hint": "hi",
+    "expected_items": ["डायपर"],
+    "expect_schedule": true,
+    "expect_refusal": false,
+    "min_confidence": 0.7,
+    "tags": ["easy", "hindi"]
+  },
+  {
+    "id": "en_002",
+    "description": "Multi-item English request",
+    "input": "I need baby formula, a teething ring, and some wet wipes. I want to get them by Tuesday.",
+    "language_hint": "en",
+    "expected_items": ["baby formula", "teething ring", "wet wipes"],
+    "expect_schedule": true,
+    "expect_refusal": false,
+    "min_confidence": 0.75,
+    "tags": ["easy", "english", "multi-item"]
+  },
+  {
+    "id": "hi_002",
+    "description": "Hindi request with brand and quantity",
+    "input": "मुझे 2 डिब्बी नेस्ले मिल्क और जॉनसन बेबी क्रीम चाहिए",
+    "language_hint": "hi",
+    "expected_items": ["नेस्ले मिल्क", "जॉनसन बेबी क्रीम"],
+    "expect_schedule": false,
+    "expect_refusal": false,
+    "min_confidence": 0.7,
+    "tags": ["easy", "hindi", "brand", "quantity"]
+  },
+  {
+    "id": "mixed_001",
+    "description": "Code-switching (Hinglish / mixed)",
+    "input": "mujhe diapers size 5 aur baby shampoo chahiye",
+    "language_hint": "hi",
+    "expected_items_partial": ["diapers", "shampoo"],
+    "expect_refusal": false,
+    "min_confidence": 0.5,
+    "tags": ["medium", "hinglish", "mixed-language"]
+  },
+  {
+    "id": "adversarial_001",
+    "description": "Completely off-topic input — should trigger refusal",
+    "input": "What is the weather like in Dubai today?",
+    "language_hint": "en",
+    "expected_items": [],
+    "expect_schedule": false,
+    "expect_refusal": true,
+    "max_confidence": 0.49,
+    "tags": ["adversarial", "off-topic", "refusal"]
+  },
+  {
+    "id": "adversarial_002",
+    "description": "Ambiguous non-product mention — should not hallucinate",
+    "input": "I need that baby thing my sister was telling me about",
+    "language_hint": "en",
+    "expected_items": [],
+    "must_not_hallucinate": true,
+    "expect_refusal": false,
+    "max_confidence": 0.69,
+    "tags": ["adversarial", "ambiguous", "hallucination-check"]
+  },
+  {
+    "id": "adversarial_003",
+    "description": "Empty / silent-equivalent input",
+    "input": "   ",
+    "language_hint": "en",
+    "expected_items": [],
+    "expect_refusal": true,
+    "max_confidence": 0.49,
+    "tags": ["adversarial", "empty-input", "refusal"]
+  },
+  {
+    "id": "adversarial_004",
+    "description": "Junk/gibberish input",
+    "input": "asdf qwerty 123 blah",
+    "language_hint": "en",
+    "expected_items": [],
+    "expect_refusal": true,
+    "max_confidence": 0.49,
+    "tags": ["adversarial", "gibberish", "refusal"]
+  },
+  {
+    "id": "en_003",
+    "description": "Urgency expressed — should reflect in schedule",
+    "input": "I urgently need newborn nappies and a baby thermometer today",
+    "language_hint": "en",
+    "expected_items": ["nappies", "thermometer"],
+    "expect_schedule": true,
+    "expect_refusal": false,
+    "min_confidence": 0.75,
+    "schedule_date_contains": ["today"],
+    "tags": ["medium", "english", "urgency"]
+  },
+  {
+    "id": "hi_003",
+    "description": "Hindi with implicit next purchase (no date)",
+    "input": "मुझे बेबी मॉनिटर और पोर्टेबल क्रिब चाहिए",
+    "language_hint": "hi",
+    "expected_items_partial": ["मॉनिटर", "क्रिब"],
+    "expect_schedule": false,
+    "expect_refusal": false,
+    "min_confidence": 0.65,
+    "tags": ["medium", "hindi", "no-date"]
+  },
+  {
+    "id": "adversarial_005",
+    "description": "Potential hallucination bait — 'and everything else' should not expand list",
+    "input": "I need diapers and everything else a newborn needs",
+    "language_hint": "en",
+    "must_not_hallucinate": true,
+    "expected_items_partial": ["diapers"],
+    "expect_refusal": false,
+    "max_confidence": 0.69,
+    "tags": ["adversarial", "hallucination-check", "vague"]
+  },
+  {
+    "id": "en_004",
+    "description": "Brand-specific request with variant",
+    "input": "Can you add Pampers Active Baby size 3, 60 count to my list? I need them for Saturday.",
+    "language_hint": "en",
+    "expected_items": ["Pampers Active Baby"],
+    "expected_details_contains": ["size 3"],
+    "expect_schedule": true,
+    "expect_refusal": false,
+    "min_confidence": 0.85,
+    "tags": ["medium", "english", "brand", "specific"]
+  },
+  {
+    "id": "hi_004",
+    "description": "Hindi gift request for a friend's baby",
+    "input": "मुझे अपनी दोस्त के बच्चे के लिए गिफ्ट चाहिए, जो 2 महीने का है",
+    "language_hint": "hi",
+    "expected_items": [],
+    "expect_refusal": true,
+    "max_confidence": 0.55,
+    "tags": ["medium", "hindi", "gift", "vague"]
+  },
+  {
+    "id": "en_005",
+    "description": "Pregnancy-related non-product query",
+    "input": "When should I start buying baby clothes during pregnancy?",
+    "language_hint": "en",
+    "expected_items": [],
+    "expect_refusal": true,
+    "max_confidence": 0.49,
+    "tags": ["adversarial", "off-topic", "refusal", "question"]
+  }
+]

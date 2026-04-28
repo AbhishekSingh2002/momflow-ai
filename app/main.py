@@ -10,8 +10,8 @@ Usage:
     # Text input (for evals / debugging, no Whisper needed):
     python -m app.main --text "I need diapers size 4 and baby lotion next week"
 
-    # Arabic text:
-    python -m app.main --text "اشتري حفاضات مقاس 3 بكرة"
+    # Hindi text:
+    python -m app.main --text "मुझे डायपर साइज 3 और बेबी लोशन चाहिए"
 
 Exit codes:
     0 — pipeline completed (even refusals are a successful completion).
@@ -53,7 +53,7 @@ def run_pipeline(
     Args:
         audio_path: Path to an audio file. Mutually exclusive with `text`.
         text:       Raw text input (bypasses STT). Mutually exclusive with `audio_path`.
-        language_hint: Fallback language if STT cannot detect ('en' | 'ar').
+        language_hint: Fallback language if STT cannot detect ('en' | 'hi').
 
     Returns:
         A dict that is either:
@@ -110,7 +110,7 @@ def run_pipeline(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="MomFlow AI — Voice/Text → Structured Shopping List (EN + AR)"
+        description="MomFlow AI — Voice/Text → Structured Shopping List (EN + HI)"
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--audio", help="Path to an audio file (.wav, .mp3, etc.)")
@@ -118,7 +118,7 @@ def main() -> None:
     parser.add_argument(
         "--lang",
         default="en",
-        choices=["en", "ar"],
+        choices=["en", "hi"],
         help="Language hint for text mode (default: en)",
     )
     args = parser.parse_args()
