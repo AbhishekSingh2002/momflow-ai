@@ -6,6 +6,8 @@
 
 **🎯 Try the live app:** [https://momflow-ai-zlknxrxub6e4yytq6cnecx.streamlit.app/](https://momflow-ai-zlknxrxub6e4yytq6cnecx.streamlit.app/)
 
+**📹 Watch the 3-minute demo:** [Loom Video](https://www.loom.com/share/b6d1b53ae96c482389c54b301c77dd1d)
+
 **Features available:**
 - 🎙️ Voice input (Speech-to-Text)
 - ✍️ Text input with bilingual support
@@ -491,14 +493,16 @@ Consider brand preferences, age appropriateness, and specific needs."
 
 ## 📹 Loom Video (3-Minute Demo)
 
-**Required but not yet created**: Screen recording showing 5 inputs:
+**✅ Completed! Watch the full demo:** [Loom Video](https://www.loom.com/share/b6d1b53ae96c482389c54b301c77dd1d)
+
+**Demo showcases 5 key scenarios:**
 1. **English multi-item**: "I need diapers size 4 and baby lotion next week"
 2. **Arabic request**: "أحتاج حفاضات مقاس 3 وكريم الأطفال"  
 3. **Off-topic refusal**: "What's the weather like?"
 4. **Ambiguous handling**: "I need that baby thing my sister mentioned"
 5. **Urgent scheduling**: "I urgently need formula today"
 
-*Video would demonstrate: voice input → structured extraction → bilingual responses → confidence scoring → proper refusals*
+*Video demonstrates: voice input → structured extraction → bilingual responses → confidence scoring → proper refusals*
 
 ## License
 
