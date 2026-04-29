@@ -6,7 +6,7 @@ Features:
   • Audio file upload mode
   • Live microphone recording (requires st-audiorec package)
   • Real-time pipeline display with per-stage status
-  • Bilingual output display (EN + HI side by side)
+  • Bilingual output display (EN + AR side by side)
 
 Run:
     streamlit run ui/app.py
@@ -58,14 +58,16 @@ st.markdown("""
         padding: 1.2rem 1.5rem;
         border-left: 4px solid #C8375B;
         margin-bottom: 1rem;
+        color: #000000;
     }
-    .response-card-hi {
+    .response-card-ar {
         direction: ltr;
         text-align: left;
         font-family: 'Noto Sans Devanagari', sans-serif;
         font-size: 1.05rem;
         border-left: none;
         border-right: 4px solid #E8A020;
+        color: #000000;
     }
     .item-badge {
         display: inline-block;
@@ -92,7 +94,7 @@ st.markdown("""
 
 st.markdown('<p class="main-title">🛍️ MomFlow AI</p>', unsafe_allow_html=True)
 st.markdown(
-    '<p class="subtitle">Voice & text shopping assistant for Mumzworld — English & Hindi</p>',
+    '<p class="subtitle">Voice & text shopping assistant for Mumzworld — English & Arabic</p>',
     unsafe_allow_html=True,
 )
 st.divider()
@@ -117,16 +119,16 @@ with col_in:
 
     if input_mode == "✍️ Type text":
         language_hint = st.selectbox(
-            "Language", ["English (en)", "Hindi (hi)"],
+            "Language", ["English (en)", "Arabic (ar)"],
             index=0
         )
-        language_hint = "hi" if "hi" in language_hint else "en"
+        language_hint = "ar" if "ar" in language_hint else "en"
 
         text_input = st.text_area(
             "What does mom need?",
             placeholder=(
                 "e.g. I need Pampers size 4 and baby lotion next week\n"
-                "या: मुझे डायपर साइज 3 और बेबी लोशन चाहिए"
+                "أو: أحتاج حفاضات مقاس 3 وزيت الأطفال"
             ),
             height=130,
         )
@@ -169,9 +171,9 @@ with col_out:
                     f'{result["refusal"]}</div>',
                     unsafe_allow_html=True,
                 )
-                st.markdown("**हिन्दी:**")
+                st.markdown("**🇸🇦 العربية:**")
                 st.markdown(
-                    f'<div class="response-card response-card-hi">{result.get("response_hi", "")}</div>',
+                    f'<div class="response-card response-card-ar">{result.get("response_ar", "")}</div>',
                     unsafe_allow_html=True,
                 )
 
@@ -218,9 +220,9 @@ with col_out:
                     )
 
                 with r_col2:
-                    st.markdown("**�� हिन्दी**")
+                    st.markdown("**🇸🇦 العربية**")
                     st.markdown(
-                        f'<div class="response-card response-card-hi">{result.get("response_hi", "")}</div>',
+                        f'<div class="response-card response-card-ar">{result.get("response_ar", "")}</div>',
                         unsafe_allow_html=True,
                     )
 

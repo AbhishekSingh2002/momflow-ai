@@ -1,10 +1,10 @@
 """
-generator.py — Bilingual response generator (English + Hindi).
+generator.py — Bilingual response generator (English + Arabic).
 
-Produces response_en and response_hi from the extracted structured data.
+Produces response_en and response_ar from the extracted structured data.
 
 Design choices:
-  • Hindi output is explicitly prompted to be written in natural Hindi
+  • Arabic output is explicitly prompted to be written in natural Arabic
     register — NOT machine-translated English.
   • json_object mode is used when the provider supports it; otherwise the prompt
     enforces JSON-only output (free OpenRouter models).
@@ -20,31 +20,31 @@ from .extractor import CONFIDENCE_THRESHOLD
 _RESPONSE_SYSTEM = """
 You are MomFlow AI, a warm and helpful shopping assistant for Mumzworld.
 You will receive structured data extracted from a mom's voice or text input.
-Your job is to write two natural, friendly responses — one in English, one in Hindi.
+Your job is to write two natural, friendly responses — one in English, one in Arabic.
 
-CRITICAL RULES FOR HINDI:
-  • Write Hindi as a native Hindi speaker would — warm, concise, maternal tone.
-  • DO NOT translate the English response word-for-word into Hindi.
-  • Use natural Hindi sentence structure, not English structure in Hindi words.
-  • Use common Hindi shopping expressions where appropriate.
+CRITICAL RULES FOR ARABIC:
+  • Write Arabic as a native Arabic speaker would — warm, concise, maternal tone.
+  • DO NOT translate the English response word-for-word into Arabic.
+  • Use natural Arabic sentence structure, not English structure in Arabic words.
+  • Use common Arabic shopping expressions where appropriate.
 
 CRITICAL RULES FOR ENGLISH:
   • Warm, concise, helpful tone — like a knowledgeable friend.
   • Summarise what was understood and any scheduled tasks.
 
 Return ONLY this JSON object with no preamble, no markdown fences:
-{"response_en": "<English response>", "response_hi": "<Hindi response>"}
+{"response_en": "<English response>", "response_ar": "<Arabic response>"}
 """
 
 _REFUSAL_SYSTEM = """
 You are MomFlow AI. The input was too vague, off-topic, or lacked enough detail.
-Generate warm, helpful refusal messages in English and Hindi asking the user to clarify.
+Generate warm, helpful refusal messages in English and Arabic asking the user to clarify.
 
-Hindi: natural Hindi register, maternal and warm.
+Arabic: natural Arabic register, maternal and warm.
 English: friendly and encouraging.
 
 Return ONLY this JSON object with no preamble, no markdown fences:
-{"response_en": "<English refusal>", "response_hi": "<Hindi refusal>"}
+{"response_en": "<English refusal>", "response_ar": "<Arabic refusal>"}
 """
 
 
@@ -60,7 +60,7 @@ def _parse_json_response(raw: str) -> dict:
 def generate_responses(extracted: dict) -> dict:
     """
     Generate bilingual responses from the extracted structured data.
-    Returns dict with response_en, response_hi, and refusal merged in.
+    Returns dict with response_en, response_ar, and refusal merged in.
     """
     confidence = extracted.get("confidence", 0.0)
     shopping_list = extracted.get("shopping_list", [])
@@ -93,6 +93,25 @@ def generate_responses(extracted: dict) -> dict:
     raw = response.choices[0].message.content
     responses = _parse_json_response(raw)
 
-    result = {**extracted, **responses}
+    # Create clean result to avoid circular references
+    result = {}
+    
+    # Copy basic fields from extracted
+    for key in ["shopping_list", "schedule", "language", "confidence", "grounded"]:
+        if key in extracted:
+            result[key] = extracted[key]
+    
+    # Add RAG fields if present
+    for key in ["grounded_items", "recommended_products", "unmatched_items", "grounding_score"]:
+        if key in extracted:
+            result[key] = extracted[key]
+    
+    # Add agent metadata if present
+    if "agent_metadata" in extracted:
+        result["agent_metadata"] = extracted["agent_metadata"]
+    
+    # Add response fields
+    result.update(responses)
     result["refusal"] = responses["response_en"] if is_refusal else None
+    
     return result

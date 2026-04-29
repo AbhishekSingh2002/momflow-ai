@@ -37,16 +37,16 @@ SAMPLES = [
         "English — urgency + schedule",
     ),
     (
-        "hi_01_diapers.mp3",
-        "मुझे डायपर साइज 3 और बेबी लोशन चाहिए",
+        "ar_01_diapers.mp3",
+        "أحتاج حفاضات مقاس 3 وكريم الأطفال",
         "shimmer",
-        "Hindi — simple request with size",
+        "Arabic — simple request with size",
     ),
     (
-        "hi_02_multi.mp3",
-        "मुझे 2 डिब्बी नेस्ले मिल्क और जॉनसन बेबी क्रीम चाहिए",
+        "ar_02_multi.mp3",
+        "أحتاج علبتين من حليب نستلي وكريم جونسون للأطفال",
         "shimmer",
-        "Hindi — multi-item with brand and quantity",
+        "Arabic — multi-item with brand and quantity",
     ),
     (
         "en_03_offtopic_refusal.mp3",
@@ -76,9 +76,9 @@ for filename, text, voice, description in SAMPLES:
     response.stream_to_file(out_path)
     print(f"      ✅ Saved to {out_path}\n")
 
-print("Done! All 5 audio files are in data/sample_audio/")
+print("Done! All 2 audio files are in data/sample_audio/")
 print()
 print("Test them with:")
-print('  python -m app.main --audio data/sample_audio/en_01_diapers_lotion.mp3')
-print('  python -m app.main --audio data/sample_audio/hi_01_diapers.mp3')
-print('  python -m app.main --audio data/sample_audio/en_03_offtopic_refusal.mp3')
+print('  python -m app.main --audio data/sample_audio/ar_test_diapers.mp3')
+print('  python -m app.main --audio data/sample_audio/en_test_diapers.mp3')
+

@@ -4,7 +4,8 @@
     "description": "Simple English request with size and timing",
     "input": "I need diapers size 4 and baby lotion next week",
     "language_hint": "en",
-    "expected_items": ["diapers"],
+    "expected_items": ["diapers", "lotion"],
+    "expected_products": ["Pampers", "Johnson"],
     "expected_details_contains": ["size 4"],
     "expect_schedule": true,
     "expect_refusal": false,
@@ -12,15 +13,16 @@
     "tags": ["easy", "english"]
   },
   {
-    "id": "hi_001",
-    "description": "Simple Hindi request with size",
-    "input": "मुझे डायपर साइज 3 और बेबी लोशन चाहिए",
-    "language_hint": "hi",
-    "expected_items": ["डायपर"],
+    "id": "ar_001",
+    "description": "Simple Arabic request with size",
+    "input": "أحتاج حفاضات مقاس 3 وكريم الأطفال",
+    "language_hint": "ar",
+    "expected_items": ["حفاضات", "كريم"],
+    "expected_products": ["Pampers", "Johnson"],
     "expect_schedule": true,
     "expect_refusal": false,
     "min_confidence": 0.7,
-    "tags": ["easy", "hindi"]
+    "tags": ["easy", "arabic"]
   },
   {
     "id": "en_002",
@@ -28,31 +30,34 @@
     "input": "I need baby formula, a teething ring, and some wet wipes. I want to get them by Tuesday.",
     "language_hint": "en",
     "expected_items": ["baby formula", "teething ring", "wet wipes"],
+    "expected_products": ["Nestle", "Philips Avent", "Huggies"],
     "expect_schedule": true,
     "expect_refusal": false,
     "min_confidence": 0.75,
     "tags": ["easy", "english", "multi-item"]
   },
   {
-    "id": "hi_002",
-    "description": "Hindi request with brand and quantity",
-    "input": "मुझे 2 डिब्बी नेस्ले मिल्क और जॉनसन बेबी क्रीम चाहिए",
-    "language_hint": "hi",
-    "expected_items": ["नेस्ले मिल्क", "जॉनसन बेबी क्रीम"],
+    "id": "ar_002",
+    "description": "Arabic request with brand and quantity",
+    "input": "أحتاج علبتين من حليب نستلي وكريم جونسون للأطفال",
+    "language_hint": "ar",
+    "expected_items": ["حليب نستلي", "كريم جونسون"],
+    "expected_products": ["Nestle", "Johnson"],
     "expect_schedule": false,
     "expect_refusal": false,
     "min_confidence": 0.7,
-    "tags": ["easy", "hindi", "brand", "quantity"]
+    "tags": ["easy", "arabic", "brand", "quantity"]
   },
   {
     "id": "mixed_001",
-    "description": "Code-switching (Hinglish / mixed)",
+    "description": "Code-switching (Arablish / mixed)",
     "input": "mujhe diapers size 5 aur baby shampoo chahiye",
-    "language_hint": "hi",
+    "language_hint": "ar",
     "expected_items_partial": ["diapers", "shampoo"],
+    "expected_products": ["Pampers", "Johnson"],
     "expect_refusal": false,
     "min_confidence": 0.5,
-    "tags": ["medium", "hinglish", "mixed-language"]
+    "tags": ["medium", "arablish", "mixed-language"]
   },
   {
     "id": "adversarial_001",
@@ -60,7 +65,7 @@
     "input": "What is the weather like in Dubai today?",
     "language_hint": "en",
     "expected_items": [],
-    "expect_schedule": false,
+    "expected_products": [],
     "expect_refusal": true,
     "max_confidence": 0.49,
     "tags": ["adversarial", "off-topic", "refusal"]
@@ -71,6 +76,7 @@
     "input": "I need that baby thing my sister was telling me about",
     "language_hint": "en",
     "expected_items": [],
+    "expected_products": [],
     "must_not_hallucinate": true,
     "expect_refusal": false,
     "max_confidence": 0.69,
@@ -82,6 +88,7 @@
     "input": "   ",
     "language_hint": "en",
     "expected_items": [],
+    "expected_products": [],
     "expect_refusal": true,
     "max_confidence": 0.49,
     "tags": ["adversarial", "empty-input", "refusal"]
@@ -92,6 +99,7 @@
     "input": "asdf qwerty 123 blah",
     "language_hint": "en",
     "expected_items": [],
+    "expected_products": [],
     "expect_refusal": true,
     "max_confidence": 0.49,
     "tags": ["adversarial", "gibberish", "refusal"]
@@ -102,6 +110,7 @@
     "input": "I urgently need newborn nappies and a baby thermometer today",
     "language_hint": "en",
     "expected_items": ["nappies", "thermometer"],
+    "expected_products": ["Pampers", "Braun"],
     "expect_schedule": true,
     "expect_refusal": false,
     "min_confidence": 0.75,
@@ -109,15 +118,16 @@
     "tags": ["medium", "english", "urgency"]
   },
   {
-    "id": "hi_003",
-    "description": "Hindi with implicit next purchase (no date)",
-    "input": "मुझे बेबी मॉनिटर और पोर्टेबल क्रिब चाहिए",
-    "language_hint": "hi",
-    "expected_items_partial": ["मॉनिटर", "क्रिब"],
+    "id": "ar_003",
+    "description": "Arabic with implicit next purchase (no date)",
+    "input": "أحتاج شاشة أطفال وسرير محمول",
+    "language_hint": "ar",
+    "expected_items_partial": ["شاشة", "سرير"],
+    "expected_products": ["Motorola", "Graco"],
     "expect_schedule": false,
     "expect_refusal": false,
     "min_confidence": 0.65,
-    "tags": ["medium", "hindi", "no-date"]
+    "tags": ["medium", "arabic", "no-date"]
   },
   {
     "id": "adversarial_005",
@@ -126,6 +136,7 @@
     "language_hint": "en",
     "must_not_hallucinate": true,
     "expected_items_partial": ["diapers"],
+    "expected_products": ["Pampers"],
     "expect_refusal": false,
     "max_confidence": 0.69,
     "tags": ["adversarial", "hallucination-check", "vague"]
@@ -136,6 +147,7 @@
     "input": "Can you add Pampers Active Baby size 3, 60 count to my list? I need them for Saturday.",
     "language_hint": "en",
     "expected_items": ["Pampers Active Baby"],
+    "expected_products": ["Pampers"],
     "expected_details_contains": ["size 3"],
     "expect_schedule": true,
     "expect_refusal": false,
@@ -143,14 +155,14 @@
     "tags": ["medium", "english", "brand", "specific"]
   },
   {
-    "id": "hi_004",
-    "description": "Hindi gift request for a friend's baby",
-    "input": "मुझे अपनी दोस्त के बच्चे के लिए गिफ्ट चाहिए, जो 2 महीने का है",
-    "language_hint": "hi",
+    "id": "ar_004",
+    "description": "Arabic gift request for a friend's baby",
+    "input": "أحتاج هدية لطفل صديقي، عمره شهرين",
+    "language_hint": "ar",
     "expected_items": [],
     "expect_refusal": true,
     "max_confidence": 0.55,
-    "tags": ["medium", "hindi", "gift", "vague"]
+    "tags": ["medium", "arabic", "gift", "vague"]
   },
   {
     "id": "en_005",

@@ -1,0 +1,19 @@
+{
+  "total_cases": 15,
+  "evaluated_cases": 0,
+  "case_results": [],
+  "aggregate_metrics": {
+    "precision": [],
+    "recall": [],
+    "f1": [],
+    "hit_rate": [],
+    "mrr": []
+  },
+  "reranking_impact": {
+    "precision_improvements": [],
+    "recall_improvements": [],
+    "f1_improvements": [],
+    "hit_rate_improvements": [],
+    "mrr_improvements": []
+  }
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "prod_001",
+    "name": "Pampers Active Baby Size 4",
+    "category": "diapers",
+    "brand": "Pampers",
+    "price": 45.99,
+    "in_stock": true,
+    "description": "Premium diapers with extra absorbency for overnight protection"
+  },
+  {
+    "id": "prod_002", 
+    "name": "Pampers Newborn Size 1",
+    "category": "diapers",
+    "brand": "Pampers",
+    "price": 42.99,
+    "in_stock": true,
+    "description": "Gentle care for newborns with soft liner"
+  },
+  {
+    "id": "prod_003",
+    "name": "Huggies Baby Wipes 80 count",
+    "category": "wipes",
+    "brand": "Huggies", 
+    "price": 12.99,
+    "in_stock": true,
+    "description": "Gentle and thick wipes for sensitive skin"
+  },
+  {
+    "id": "prod_004",
+    "name": "Johnson Baby Lotion 275ml",
+    "category": "lotion",
+    "brand": "Johnson",
+    "price": 18.99,
+    "in_stock": true,
+    "description": "Clinically proven mild and gentle baby lotion"
+  },
+  {
+    "id": "prod_005",
+    "name": "Nestle Cerelac Wheat 300g",
+    "category": "formula",
+    "brand": "Nestle",
+    "price": 28.99,
+    "in_stock": true,
+    "description": "Nutritious infant cereal with essential vitamins"
+  },
+  {
+    "id": "prod_006",
+    "name": "Aptamil Infant Formula 800g",
+    "category": "formula", 
+    "brand": "Aptamil",
+    "price": 65.99,
+    "in_stock": true,
+    "description": "Premium infant formula with DHA and ARA"
+  },
+  {
+    "id": "prod_007",
+    "name": "Baby Monitor Digital",
+    "category": "monitor",
+    "brand": "Motorola",
+    "price": 89.99,
+    "in_stock": true,
+    "description": "Digital baby monitor with night vision"
+  },
+  {
+    "id": "prod_008",
+    "name": "Portable Baby Crib",
+    "category": "crib",
+    "brand": "Graco",
+    "price": 125.99,
+    "in_stock": true,
+    "description": "Lightweight portable crib with easy folding"
+  },
+  {
+    "id": "prod_009",
+    "name": "Baby Thermometer Digital",
+    "category": "thermometer",
+    "brand": "Braun",
+    "price": 35.99,
+    "in_stock": true,
+    "description": "Accurate digital thermometer for babies"
+  },
+  {
+    "id": "prod_010",
+    "name": "Teething Ring Set",
+    "category": "teether",
+    "brand": "Philips Avent",
+    "price": 8.99,
+    "in_stock": true,
+    "description": "Soft teething rings for soothing gums"
+  }
+]
