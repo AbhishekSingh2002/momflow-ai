@@ -331,6 +331,106 @@ Metrics include:
 - **MRR**: Mean Reciprocal Rank
 - **NDCG**: Normalized Discounted Cumulative Gain
 
+## 🎯 Problem Selection & Tradeoffs
+
+### Why This Problem
+**High-leverage customer pain point**: Moms frequently voice-shop while multitasking (driving, cooking, caring for baby). Current voice assistants fail at:
+- **Context understanding**: "Get baby stuff" → needs specific products
+- **Multilingual handling**: Arabic-speaking moms get English-only responses  
+- **Shopping structure**: Voice → cart, not just search results
+- **Uncertainty expression**: "That baby thing" should trigger clarification, not guess
+
+### Rejected Alternatives
+1. **Product image → PDP content**: Requires image processing pipeline, less direct customer value
+2. **Return reason classification**: Internal tool, less AI complexity (mostly classification)
+3. **Review synthesis**: Interesting but less immediate business impact
+4. **Gift finder**: Cool but narrower use case than general shopping
+
+### Architecture Choices
+- **RAG over product catalog**: Enables "Find diapers like Pampers" semantic matching
+- **Agent loop**: Handles ambiguous inputs through self-correction
+- **Hybrid search**: Combines exact brand matching with semantic understanding
+- **Confidence-based rejection**: Critical for safety - never invent products
+
+### Model Selection
+- **OpenRouter + GPT-3.5-turbo**: Cost-effective, reliable structured output
+- **OpenAI Whisper**: Industry-standard STT, handles Arabic well
+- **GPT-4o-mini for re-ranking**: Better reasoning than retrieval alone
+- **Local caching**: Avoids repeated embedding costs
+
+### Known Failure Modes
+- **Ambiguous references**: "that thing" → currently extracts literally, could improve with context
+- **Brand misspellings**: "Pampers" vs "Pampers" → handled by embeddings but not perfect
+- **Mixed code-switching**: Partial English/Arabic → works but could be smoother
+
+## 🛠️ Tooling & AI Assistance
+
+### Primary Stack
+- **OpenRouter**: Model gateway for LLM calls (GPT-3.5-turbo, GPT-4o-mini)
+- **OpenAI API**: Whisper for speech-to-text, embeddings
+- **Streamlit**: Web UI for interactive demo
+- **Python**: Core pipeline with Pydantic validation
+
+### AI-Assisted Development
+- **Cursor IDE**: Pair programming for rapid prototyping
+- **ChatGPT**: Prompt engineering and debugging assistance
+- **Generated code patterns**: RAG implementation, agent loops, evaluation frameworks
+
+### What Worked Well
+- **Agent loop design**: AI helped iterate on self-correction logic
+- **Evaluation framework**: Generated comprehensive test cases automatically
+- **Arabic prompt engineering**: AI provided native-sounding Arabic system prompts
+
+### What Required Manual Intervention
+- **Schema validation logic**: Too complex for AI generation, hand-coded
+- **Error handling patterns**: AI missed edge cases, manually added
+- **Performance optimization**: Caching strategy designed manually
+
+### Key Prompts
+```python
+# Extraction system prompt
+"You are MomFlow AI, an intelligent shopping assistant for Mumzworld.
+Extract structured shopping intent from mom's voice or text input.
+Return valid JSON with shopping_list, schedule, language, confidence, grounded."
+
+# Re-ranking prompt  
+"Given query and products, rank by relevance for a mom shopping for baby items.
+Consider brand preferences, age appropriateness, and specific needs."
+```
+
+## ⏱️ Time Investment (~5 hours total)
+
+### Phase 1: Foundation (2 hours)
+- **Problem framing**: Research Mumzworld use cases, select voice-to-shopping
+- **Architecture design**: RAG + agent loop + confidence system
+- **Core pipeline**: Basic extraction and validation
+
+### Phase 2: Advanced Features (2 hours)  
+- **RAG implementation**: Product catalog, hybrid search, embeddings
+- **Agent loop**: Self-correction for ambiguous inputs
+- **Re-ranking**: LLM-based result optimization
+
+### Phase 3: Polish & Eval (1 hour)
+- **Evaluation framework**: 15 test cases, adversarial examples
+- **UI development**: Streamlit interface with bilingual support
+- **Documentation**: README, inline comments, cleanup
+
+### Time Overruns
+- **Arabic text processing**: +30 minutes (language complexity)
+- **Evaluation debugging**: +20 minutes (edge case handling)
+- **UI styling**: +15 minutes (professional appearance)
+
+## 📹 Loom Video (3-Minute Demo)
+
+**Required but not yet created**: Screen recording showing 5 inputs:
+1. **English multi-item**: "I need diapers size 4 and baby lotion next week"
+2. **Arabic request**: "أحتاج حفاضات مقاس 3 وكريم الأطفال"  
+3. **Off-topic refusal**: "What's the weather like?"
+4. **Ambiguous handling**: "I need that baby thing my sister mentioned"
+5. **Urgent scheduling**: "I urgently need formula today"
+
+*Video would demonstrate: voice input → structured extraction → bilingual responses → confidence scoring → proper refusals*
+
 ## License
 
 Built for Mumzworld AI Engineering Internship Assessment.
