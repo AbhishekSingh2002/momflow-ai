@@ -27,6 +27,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app.main import run_pipeline
+import os
+
+# Check for API keys
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+DEMO_MODE = not (OPENAI_API_KEY and OPENROUTER_API_KEY)
 
 # ── Page config ────────────────────────────────────────────────────────────
 
@@ -97,6 +103,14 @@ st.markdown(
     '<p class="subtitle">Voice & text shopping assistant for Mumzworld — English & Arabic</p>',
     unsafe_allow_html=True,
 )
+
+# Show demo mode warning if API keys are missing
+if DEMO_MODE:
+    st.warning("""
+    🎭 **Demo Mode**: API keys not configured. Some features will show demo responses.
+    To enable full functionality, add OPENAI_API_KEY and OPENROUTER_API_KEY in Streamlit Cloud settings.
+    """)
+
 st.divider()
 
 # ── Input Section ──────────────────────────────────────────────────────────

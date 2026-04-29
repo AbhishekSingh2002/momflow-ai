@@ -82,10 +82,12 @@ try:
 except ImportError:
     raise ImportError("OpenAI package required. Install with: pip install openai")
 
+# Handle missing API keys for demo deployment
 if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY required for speech-to-text")
-
-stt_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
+    print("Warning: OPENAI_API_KEY not found. Some features will be disabled.")
+    stt_client = None
+else:
+    stt_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 
 # Create the LLM client instance for import
 llm_client = get_openai_client()
