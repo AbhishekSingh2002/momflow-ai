@@ -2,6 +2,18 @@
 
 🚀 **Production-ready AI shopping assistant** with advanced RAG, hybrid search, and intelligent re-ranking for Mumzworld.
 
+## 🌐 **Live Demo**
+
+**🎯 Try the live app:** [https://momflow-ai-zlknxrxub6e4yytq6cnecx.streamlit.app/](https://momflow-ai-zlknxrxub6e4yytq6cnecx.streamlit.app/)
+
+**Features available:**
+- 🎙️ Voice input (Speech-to-Text)
+- ✍️ Text input with bilingual support
+- 🛒 Smart shopping list extraction
+- 🌍 English + Arabic responses
+- 📊 Real-time confidence scoring
+- 🎯 Product recommendations via RAG
+
 ## 🧠 Advanced Features
 
 ### Core Capabilities
@@ -20,6 +32,63 @@
 - 📊 **Retrieval Evaluation**: Comprehensive metrics (precision, recall, MRR, NDCG)
 - 🔄 **Agent Loop**: Self-correction through iterative refinement
 - 🛡️ **Quality Control**: Confidence-based rejection and validation
+
+## 🚀 Live Deployments
+
+### 🌐 Streamlit Cloud (Primary Demo)
+
+**🎯 Live App:** [https://momflow-ai-zlknxrxub6e4yytq6cnecx.streamlit.app/](https://momflow-ai-zlknxrxub6e4yytq6cnecx.streamlit.app/)
+
+✅ **Full interactive demo** - All features working  
+✅ **Voice + Text input** - Complete functionality  
+✅ **Bilingual responses** - English + Arabic  
+✅ **Professional UI** - Mobile-responsive  
+
+### 🌐 Vercel Landing Page
+
+**🎯 Project Showcase:** [https://momflow-ai.vercel.app/](https://momflow-ai.vercel.app/)
+
+✅ **Beautiful landing page** - Project overview  
+✅ **Technical features** - Capabilities showcase  
+✅ **GitHub integration** - Easy source access  
+✅ **Mobile optimized** - Works on all devices  
+
+## 🛠️ Deployment Options
+
+### Streamlit Cloud (Recommended for Full App)
+
+**Best for interactive demos:**
+
+1. **Go to [share.streamlit.io](https://share.streamlit.io)**
+2. **Connect GitHub repository**
+3. **Main file path:** `ui/app.py`
+4. **Set environment variables** in secrets:
+   ```toml
+   OPENAI_API_KEY = "your_key_here"
+   OPENROUTER_API_KEY = "your_key_here"
+   MODEL_PROVIDER = "openrouter"
+   ```
+
+### Vercel (Landing Page)
+
+**Great for project showcase:**
+
+1. **Connect GitHub to Vercel**
+2. **Automatic deployment** - Serverless functions
+3. **Custom domain** - Professional appearance
+
+### Railway (Full App Alternative)
+
+**When trial is available:**
+
+1. **Install Railway CLI**
+   ```bash
+   npm install -g @railway/cli
+   ```
+2. **Deploy from repo**
+   ```bash
+   railway login && railway init && railway up
+   ```
 
 ## Quick Start
 
